@@ -1,0 +1,205 @@
+openapi: 3.1.0
+info:
+  title: Smarbar Backoffice AP
+  description: Smarbar Backoffice AP
+  version: 1.0.0
+paths:
+  /categories:
+    get:
+      tags:
+        - Categories
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: arry
+                items:
+                  $ref: "#/components/schemas/category"
+    post:
+      tags:
+        - Categories
+      requestBody:
+        content:
+          application:json:
+            schema:
+              $ref: "#/components/schemas/category"
+      responses:
+        201:
+          $ref: "#/components/responses/201"
+  /categories/{categoryId}:
+    parameters:
+      - name: categoryId
+        schema:
+          type: string
+        in: path
+    put:
+      tags:
+        - Categories
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/category"
+      responses:
+        200:
+          description: Entity successfully updated
+    delete:
+      tags:
+        - Categories
+      responses:
+        200:
+          description: Entity successfully deleted
+    get:
+      tags:
+        - Categories
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/category"
+  /articles:
+    get:
+      tags:
+        - Articles
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/article"
+    post:
+      tags:
+        - Articles
+      requestBody:
+        content:
+          application:json:
+            schema:
+              $ref: "#/components/schemas/article"
+      responses:
+        201:
+          $ref: "#/components/responses/201"
+  /articles/{articleId}:
+    parameters:
+      - name: articleId
+        schema:
+          type: string
+        in: path
+    put:
+      tags:
+        - Articles
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/article"
+      responses:
+        200:
+          description: Entity successfully updated
+    delete:
+      tags:
+        - Articles
+      responses:
+        200:
+          description: Entity successfully deleted
+    get:
+      tags:
+        - Articles
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/article"
+  /tables:
+    get:
+      tags:
+        - Tables
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/table"
+    post:
+      tags:
+        - Tables
+      requestBody:
+        content:
+          application:json:
+            schema:
+              $ref: "#/components/schemas/table"
+      responses:
+        201:
+          $ref: "#/components/responses/201"
+  /tables/{tableId}:
+    parameters:
+      - name: tableId
+        schema:
+          type: string
+        in: path
+    put:
+      tags:
+        - Tables
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/table"
+      responses:
+        200:
+          description: Entity successfully updated
+    delete:
+      tags:
+        - Tables
+      responses:
+        200:
+          description: Entity successfully deleted
+    get:
+      tags:
+        - Tables
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/table"
+components:
+  schemas:
+    category:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+    article:
+      type: object
+      properties:
+        name:
+          type: string
+        price:
+          type: number
+        description:
+          type: string
+        picture:
+          type: string
+    table:
+      type: object
+      properties:
+        name:
+          type: string,
+        seatCount:
+          type: string,
+        active:
+          type: boolean
+  responses:
+    201:
+      headers:
+        Location:
+          description: Entity successfully created
