@@ -1,35 +1,37 @@
 package de.schulte.smartbar.backoffice.api;
 
+import java.net.URI;
 import java.util.List;
 
 import de.schulte.smartbar.backoffice.api.model.Category;
+import jakarta.ws.rs.core.Response;
 
 public class CategoriesResource implements CategoriesApi {
 
     private final Category category = new Category().name("drinks");
 
     @Override
-    public void categoriesCategoryIdDelete(String categoryId) {
-
+    public Response categoriesCategoryIdDelete(String categoryId) {
+        return Response.ok().build();
     }
 
     @Override
-    public Category categoriesCategoryIdGet(String categoryId) {
-        return category;
+    public Response categoriesCategoryIdGet(String categoryId) {
+        return Response.ok(category).build();
     }
 
     @Override
-    public void categoriesCategoryIdPut(String categoryId, Category category) {
-
+    public Response categoriesCategoryIdPut(String categoryId, Category category) {
+        return Response.ok().build();
     }
 
     @Override
-    public List<Category> categoriesGet() {
-        return List.of(category);
+    public Response categoriesGet() {
+        return Response.ok(List.of(category)).build();
     }
 
     @Override
-    public void categoriesPost(Category category) {
-
+    public Response categoriesPost(Category category) {
+        return Response.created(URI.create("todo")).build();
     }
 }

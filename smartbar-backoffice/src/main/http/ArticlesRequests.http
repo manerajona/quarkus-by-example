@@ -1,0 +1,24 @@
+### Create new
+POST {{url}}/articles
+Content-Type: application/json
+
+{
+  "name": "Merlot"
+}
+
+### Modify
+PUT {{url}}/articles/4711
+Content-Type: application/json
+
+{
+  "name": "Merlot"
+}
+
+### Get all
+GET {{url}}/articles
+
+### Get single
+GET {{url}}/articles/4711
+
+### Delete
+DELETE {{url}}/articles/4711
