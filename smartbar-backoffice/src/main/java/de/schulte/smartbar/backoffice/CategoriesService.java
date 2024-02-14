@@ -7,7 +7,7 @@ import jakarta.enterprise.context.ApplicationScoped;
 public class CategoriesService {
 
     public Category get() {
-        return new Category().name("drinks");
+        return new Category().name("very fancy drink");
     }
 
 }
