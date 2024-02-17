@@ -1,4 +1,4 @@
-package de.schulte.smartbar.backoffice.api;
+package de.schulte.smartbar.backoffice.categories;
 
 import static io.restassured.RestAssured.given;
 
@@ -7,7 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import de.schulte.smartbar.backoffice.CategoriesService;
 import de.schulte.smartbar.backoffice.api.model.Category;
 import io.quarkus.test.InjectMock;
 import io.quarkus.test.junit.QuarkusTest;

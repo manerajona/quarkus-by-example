@@ -132,7 +132,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/table"
+                  $ref: "#/components/schemas/apiTable"
     post:
       tags:
         - Tables
@@ -140,7 +140,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/table"
+              $ref: "#/components/schemas/apiTable"
       responses:
         201:
           $ref: "#/components/responses/201"
@@ -157,7 +157,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/table"
+              $ref: "#/components/schemas/apiTable"
       responses:
         200:
           description: Entity successfully updated
@@ -176,7 +176,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/table"
+                $ref: "#/components/schemas/apiTable"
 components:
   schemas:
     category:
@@ -197,7 +197,7 @@ components:
           type: string
         picture:
           type: string
-    table:
+    apiTable:
       type: object
       properties:
         name:

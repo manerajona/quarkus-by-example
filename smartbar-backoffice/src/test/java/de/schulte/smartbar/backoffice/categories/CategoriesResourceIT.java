@@ -1,4 +1,4 @@
-package de.schulte.smartbar.backoffice.api;
+package de.schulte.smartbar.backoffice.categories;
 
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 

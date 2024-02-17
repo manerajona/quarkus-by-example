@@ -1,10 +1,10 @@
-package de.schulte.smartbar.backoffice.api;
+package de.schulte.smartbar.backoffice.tables;
 
 import java.net.URI;
 import java.util.List;
 
-import de.schulte.smartbar.backoffice.TablesService;
-import de.schulte.smartbar.backoffice.api.model.Table;
+import de.schulte.smartbar.backoffice.api.TablesApi;
+import de.schulte.smartbar.backoffice.api.model.ApiTable;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.core.Response;
 
@@ -23,7 +23,7 @@ public class TablesResource implements TablesApi {
     }
 
     @Override
-    public Response tablesPost(Table table) {
+    public Response tablesPost(ApiTable table) {
         return Response.created(URI.create("todo")).build();
     }
 
@@ -38,7 +38,7 @@ public class TablesResource implements TablesApi {
     }
 
     @Override
-    public Response tablesTableIdPut(String tableId, Table table) {
+    public Response tablesTableIdPut(String tableId, ApiTable table) {
         return Response.ok().build();
     }
 }

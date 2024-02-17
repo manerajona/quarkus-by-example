@@ -1,4 +1,4 @@
-package de.schulte.smartbar.backoffice;
+package de.schulte.smartbar.backoffice.articles;
 
 import de.schulte.smartbar.backoffice.api.model.Article;
 import jakarta.enterprise.context.ApplicationScoped;

@@ -1,9 +1,9 @@
-package de.schulte.smartbar.backoffice.api;
+package de.schulte.smartbar.backoffice.articles;
 
 import java.net.URI;
 import java.util.List;
 
-import de.schulte.smartbar.backoffice.ArticlesService;
+import de.schulte.smartbar.backoffice.api.ArticlesApi;
 import de.schulte.smartbar.backoffice.api.model.Article;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.core.Response;
