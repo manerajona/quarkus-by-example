@@ -203,7 +203,7 @@ components:
         name:
           type: string,
         seatCount:
-          type: string,
+          type: integer,
         active:
           type: boolean
   responses:

@@ -23,8 +23,14 @@ public class TablesResource implements TablesApi {
     }
 
     @Override
-    public Response tablesPost(ApiTable table) {
-        return Response.created(URI.create("todo")).build();
+    public Response tablesPost(ApiTable apiTable) {
+        final Table table = new Table();
+        table.setName(apiTable.getName());
+        table.setSeatCount(apiTable.getSeatCount());
+        table.setActive(apiTable.getActive());
+
+        final Table persitedTable = tablesService.persit(table);
+        return Response.created(URI.create("/tables/" + persitedTable.getId())).build();
     }
 
     @Override

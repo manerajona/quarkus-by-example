@@ -3,7 +3,9 @@ POST {{url}}/tables
 Content-Type: application/json
 
 {
-  "name": "costa-rica"
+  "name": "oslo",
+  "seatCount": 4,
+  "active": false
 }
 
 ### Modify
