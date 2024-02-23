@@ -3,7 +3,7 @@ POST {{url}}/tables
 Content-Type: application/json
 
 {
-  "name": "Berlin",
+  "name": "Oslo",
   "seatCount": 8,
   "active": true
 }
