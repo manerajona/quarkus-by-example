@@ -1,0 +1,9 @@
+quarkus:
+  datasource:
+    username: bob
+    password: bob
+    jdbc:
+      url: jdbc:postgresql://localhost:5432/smartbarbo
+  hibernate-orm:
+    database:
+      generation: drop-and-create
