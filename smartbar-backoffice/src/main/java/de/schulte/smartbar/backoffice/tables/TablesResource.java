@@ -13,22 +13,25 @@ public class TablesResource implements TablesApi {
 
     private final TablesService tablesService;
 
+    private final TableMapper mapper;
+
     @Inject
-    public TablesResource(TablesService tablesService) {
+    public TablesResource(TablesService tablesService, TableMapper mapper) {
         this.tablesService = tablesService;
+        this.mapper = mapper;
     }
 
     @Override
     public Response tablesGet() {
         final List<Table> tables = tablesService.listAll();
-        return Response.ok(tables.stream().map(this::mapTableToApiTable).toList())
+        return Response.ok(tables.stream().map(mapper::mapToApiTable).toList())
                        .build();
     }
 
     @Override
     public Response tablesPost(ApiTable apiTable) {
         final Table table = new Table();
-        mapApiTableToTable(apiTable, table);
+        mapper.mapToTable(apiTable, table);
         final Table persitedTable = tablesService.persit(table);
         return Response.created(URI.create("/tables/" + persitedTable.getId())).build();
     }
@@ -48,7 +51,7 @@ public class TablesResource implements TablesApi {
         if (table.isEmpty()) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.ok(mapTableToApiTable(table.get())).build();
+        return Response.ok(mapper.mapToApiTable(table.get())).build();
     }
 
     @Override
@@ -58,23 +61,8 @@ public class TablesResource implements TablesApi {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
         final Table table = existingTable.get();
-        mapApiTableToTable(apiTable, table);
+        mapper.mapToTable(apiTable, table);
         tablesService.update(table);
         return Response.ok().build();
-    }
-
-    private void mapApiTableToTable(ApiTable apiTable, Table table) {
-        table.setName(apiTable.getName());
-        table.setSeatCount(apiTable.getSeatCount());
-        table.setActive(apiTable.getActive());
-    }
-
-    private ApiTable mapTableToApiTable(Table table) {
-        final ApiTable apiTable = new ApiTable();
-        apiTable.setActive(table.getActive());
-        apiTable.setName(table.getName());
-        apiTable.setSeatCount(table.getSeatCount());
-        apiTable.setId(table.getId());
-        return apiTable;
     }
 }

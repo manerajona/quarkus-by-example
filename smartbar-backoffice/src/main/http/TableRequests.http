@@ -3,9 +3,9 @@ POST {{url}}/tables
 Content-Type: application/json
 
 {
-  "name": "Oslo",
-  "seatCount": 8,
-  "active": true
+  "name": "Munich",
+  "seatCount": 4,
+  "active": false
 }
 
 ### Modify
@@ -13,7 +13,9 @@ PUT {{url}}/tables/2
 Content-Type: application/json
 
 {
-  "name": "costa-rica"
+  "name": "costa-rica",
+  "seatCount": 10,
+  "active": true
 }
 
 ### Get all
