@@ -13,9 +13,12 @@ public class CategoriesResource implements CategoriesApi {
 
     private final CategoriesService categoriesService;
 
+    private final CategoryMapper mapper;
+
     @Inject
-    public CategoriesResource(CategoriesService categoriesService) {
+    public CategoriesResource(CategoriesService categoriesService, CategoryMapper mapper) {
         this.categoriesService = categoriesService;
+        this.mapper = mapper;
     }
 
     @Override
@@ -33,7 +36,7 @@ public class CategoriesResource implements CategoriesApi {
         if (category.isEmpty()) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.ok(mapCategoryToApiCategory(category.get())).build();
+        return Response.ok(mapper.mapToApiCategory(category.get())).build();
     }
 
     @Override
@@ -43,7 +46,7 @@ public class CategoriesResource implements CategoriesApi {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
         final Category category = existingCategory.get();
-        mapApiCategoryToCategory(apiCategory, category);
+        mapper.mapToCategory(apiCategory, category);
         categoriesService.update(category);
         return Response.ok().build();
     }
@@ -51,28 +54,16 @@ public class CategoriesResource implements CategoriesApi {
     @Override
     public Response categoriesGet() {
         final List<Category> categories = categoriesService.listAll();
-        return Response.ok(categories.stream().map(this::mapCategoryToApiCategory).toList())
+        return Response.ok(categories.stream().map(mapper::mapToApiCategory).toList())
                        .build();
     }
 
     @Override
     public Response categoriesPost(ApiCategory apiCategory) {
         final Category category = new Category();
-        mapApiCategoryToCategory(apiCategory, category);
+        mapper.mapToCategory(apiCategory, category);
         final Category persitedCategory = categoriesService.persit(category);
         return Response.created(URI.create("/categories/" + persitedCategory.getId())).build();
     }
 
-    private void mapApiCategoryToCategory(ApiCategory apiCategory, Category category) {
-        category.setName(apiCategory.getName());
-        category.setDescription(apiCategory.getDescription());
-    }
-
-    private ApiCategory mapCategoryToApiCategory(Category category) {
-        final ApiCategory apiCategory = new ApiCategory();
-        apiCategory.setDescription(category.getDescription());
-        apiCategory.setName(category.getName());
-        apiCategory.setId(category.getId());
-        return apiCategory;
-    }
 }

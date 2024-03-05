@@ -17,10 +17,13 @@ public class ArticlesResource implements ArticlesApi {
 
     private final CategoriesService categoriesService;
 
+    private final ArticleMapper mapper;
+
     @Inject
-    public ArticlesResource(ArticlesService articlesService, CategoriesService categoriesService) {
+    public ArticlesResource(ArticlesService articlesService, CategoriesService categoriesService, ArticleMapper mapper) {
         this.articlesService = articlesService;
         this.categoriesService = categoriesService;
+        this.mapper = mapper;
     }
 
     @Override
@@ -38,7 +41,7 @@ public class ArticlesResource implements ArticlesApi {
         if (article.isEmpty()) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.ok(mapArticleToApiArticle(article.get())).build();
+        return Response.ok(mapper.mapToApiArticle(article.get())).build();
     }
 
     @Override
@@ -48,7 +51,7 @@ public class ArticlesResource implements ArticlesApi {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
         final Article article = existingArticle.get();
-        mapApiArticleToArticle(apiArticle, article);
+        mapper.mapToArticle(apiArticle, article);
         articlesService.update(article);
         return Response.ok().build();
     }
@@ -56,7 +59,7 @@ public class ArticlesResource implements ArticlesApi {
     @Override
     public Response articlesGet() {
         final List<Article> articles = articlesService.listAll();
-        return Response.ok(articles.stream().map(this::mapArticleToApiArticle).toList())
+        return Response.ok(articles.stream().map(mapper::mapToApiArticle).toList())
                        .build();
     }
 
@@ -67,27 +70,10 @@ public class ArticlesResource implements ArticlesApi {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
         final Article article = new Article();
-        mapApiArticleToArticle(apiArticle, article);
+        mapper.mapToArticle(apiArticle, article);
         article.setCategory(category.get());
         final Article persitedArticle = articlesService.persit(article);
         return Response.created(URI.create("/articles/" + persitedArticle.getId())).build();
-    }
-
-    private void mapApiArticleToArticle(ApiArticle apiArticle, Article article) {
-        article.setName(apiArticle.getName());
-        article.setDescription(apiArticle.getDescription());
-        article.setPrice(apiArticle.getPrice());
-        article.setPictureBase64(apiArticle.getPicture());
-    }
-
-    private ApiArticle mapArticleToApiArticle(Article article) {
-        final ApiArticle apiArticle = new ApiArticle();
-        apiArticle.setDescription(article.getDescription());
-        apiArticle.setName(article.getName());
-        apiArticle.setPicture(article.getPictureBase64());
-        apiArticle.setPrice(article.getPrice());
-        apiArticle.setId(article.getId());
-        return apiArticle;
     }
 
 }
