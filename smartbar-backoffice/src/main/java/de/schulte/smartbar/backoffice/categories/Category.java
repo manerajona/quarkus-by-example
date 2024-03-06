@@ -1,6 +1,6 @@
 package de.schulte.smartbar.backoffice.categories;
 
-import de.schulte.smartbar.backoffice.BaseEntity;
+import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
@@ -10,27 +10,11 @@ import jakarta.validation.constraints.NotNull;
 @Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = "name")
 })
-public class Category extends BaseEntity {
+public class Category extends PanacheEntity {
 
     @NotNull
-    private String name;
+    public String name;
 
     @NotNull
-    private String description;
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    public String description;
 }

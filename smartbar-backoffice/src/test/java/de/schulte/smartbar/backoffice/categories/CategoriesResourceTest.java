@@ -1,6 +1,6 @@
 package de.schulte.smartbar.backoffice.categories;
 
-import io.quarkus.test.InjectMock;
+import io.quarkus.panache.mock.PanacheMock;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -16,14 +16,12 @@ import static io.restassured.RestAssured.given;
 @QuarkusTest
 class CategoriesResourceTest {
 
-    @InjectMock
-    CategoriesService categoriesServiceMock;
-
     @BeforeEach
     void setUp() {
+        PanacheMock.mock(Category.class);
         final Category category = new Category();
-        category.setName("Mock");
-        Mockito.when(categoriesServiceMock.listAll()).thenReturn(List.of(category));
+        category.name = "Mock";
+        Mockito.when(Category.listAll()).thenReturn(List.of(category));
     }
 
     @Test
