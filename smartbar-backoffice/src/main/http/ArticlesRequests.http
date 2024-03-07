@@ -32,3 +32,6 @@ DELETE {{url}}/articles/51
 
 ### Get by category
 GET {{url}}/articles/category/1001
+
+### Count
+GET {{url}}/articles/count
