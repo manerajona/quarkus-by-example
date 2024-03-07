@@ -29,3 +29,6 @@ GET {{url}}/articles/51
 
 ### Delete
 DELETE {{url}}/articles/51
+
+### Get by category
+GET {{url}}/articles/category/1001
