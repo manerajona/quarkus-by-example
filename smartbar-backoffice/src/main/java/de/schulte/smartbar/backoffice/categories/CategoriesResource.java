@@ -15,24 +15,27 @@ public class CategoriesResource implements CategoriesApi {
 
     private final CategoryMapper mapper;
 
+    private final CategoriesRepository categoriesRepository;
+
     @Inject
-    public CategoriesResource(CategoryMapper mapper) {
+    public CategoriesResource(CategoryMapper mapper, CategoriesRepository categoriesRepository) {
         this.mapper = mapper;
+        this.categoriesRepository = categoriesRepository;
     }
 
     @Override
     public Response categoriesCategoryIdDelete(Long categoryId) {
-        final Optional<Category> category = Category.findByIdOptional(categoryId);
+        final Optional<Category> category = categoriesRepository.findByIdOptional(categoryId);
         if (category.isEmpty()) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        category.get().delete();
+        categoriesRepository.delete(category.get());
         return Response.ok().build();
     }
 
     @Override
     public Response categoriesCategoryIdGet(Long categoryId) {
-        final Optional<Category> category = Category.findByIdOptional(categoryId);
+        final Optional<Category> category = categoriesRepository.findByIdOptional(categoryId);
         if (category.isEmpty()) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
@@ -41,7 +44,7 @@ public class CategoriesResource implements CategoriesApi {
 
     @Override
     public Response categoriesCategoryIdPut(Long categoryId, ApiCategory apiCategory) {
-        final Optional<Category> existingCategory = Category.findByIdOptional(categoryId);
+        final Optional<Category> existingCategory = categoriesRepository.findByIdOptional(categoryId);
         if (existingCategory.isEmpty()) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
@@ -52,7 +55,7 @@ public class CategoriesResource implements CategoriesApi {
 
     @Override
     public Response categoriesGet() {
-        final List<Category> categories = Category.listAll();
+        final List<Category> categories = categoriesRepository.listAll();
         return Response.ok(categories.stream().map(mapper::mapToApiCategory).toList())
                        .build();
     }
@@ -61,8 +64,8 @@ public class CategoriesResource implements CategoriesApi {
     public Response categoriesPost(ApiCategory apiCategory) {
         final Category category = new Category();
         mapper.mapToCategory(apiCategory, category);
-        category.persist();
-        return Response.created(URI.create("/categories/" + category.id)).build();
+        categoriesRepository.persist(category);
+        return Response.created(URI.create("/categories/" + category.getId())).build();
     }
 
 }

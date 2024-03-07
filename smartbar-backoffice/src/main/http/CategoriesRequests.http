@@ -12,7 +12,8 @@ PUT {{url}}/categories/2
 Content-Type: application/json
 
 {
-  "name": "wine"
+  "name": "wine",
+  "description": "a collection from our finest wines"
 }
 
 ### Get all
