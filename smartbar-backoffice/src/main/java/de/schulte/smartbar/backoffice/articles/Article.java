@@ -14,6 +14,7 @@ import java.util.List;
 @Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = {"name", "category_id"})
 })
+@NamedQuery(name = "Article.byCategory", query = "from Article where category.id = :id order by price desc")
 public class Article extends BaseEntity {
 
     @NotNull
