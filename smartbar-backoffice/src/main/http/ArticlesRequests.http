@@ -23,6 +23,8 @@ Content-Type: application/json
 
 ### Get all
 GET {{url}}/articles
+Authorization: Basic YWxpY2U6cHc=
+#Authorization: Basic Ym9iOmFkbWlucHc=
 
 ### Get single
 GET {{url}}/articles/51
