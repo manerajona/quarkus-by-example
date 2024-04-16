@@ -9,4 +9,8 @@ quarkus:
       generation: drop-and-create
   http:
     auth:
-      basic: true
+      form:
+        enabled: true
+        login-page: ""
+        error-page: ""
+        landing-page: ""
