@@ -7,12 +7,3 @@ quarkus:
   hibernate-orm:
     database:
       generation: drop-and-create
-  ssl:
-    certificate:
-      key-store-file: smartbarbo.p12
-      trust-store-file: sbotrust.p12
-    client-auth: required
-  insecure-requests: redirect
-  http:
-    auth:
-      basic: true

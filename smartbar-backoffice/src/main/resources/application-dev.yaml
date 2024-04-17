@@ -9,10 +9,8 @@ quarkus:
       generation: drop-and-create
   http:
     auth:
-      basic: true
-    ssl:
-      certificate:
-        key-store-file: smartbarbo.p12
-        trust-store-file: sbotrust.p12
-      client-auth: required
-    insecure-requests: redirect
+      form:
+        enabled: true
+        login-page: ""
+        error-page: ""
+        landing-page: ""
