@@ -7,10 +7,3 @@ quarkus:
   hibernate-orm:
     database:
       generation: drop-and-create
-  http:
-    auth:
-      form:
-        enabled: true
-        login-page: ""
-        error-page: ""
-        landing-page: ""
