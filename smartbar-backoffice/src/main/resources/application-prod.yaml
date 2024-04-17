@@ -2,8 +2,8 @@ quarkus:
   datasource:
     username: bob
     password: bob
-    reactive:
-      url: vertx-reactive:postgresql://localhost:6000/smartbarbo
+    jdbc:
+      url: jdbc:postgresql://localhost:6000/smartbarbo
   hibernate-orm:
     database:
       generation: drop-and-create

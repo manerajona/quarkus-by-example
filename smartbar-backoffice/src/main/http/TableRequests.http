@@ -20,7 +20,6 @@ Content-Type: application/json
 
 ### Get all
 GET {{url}}/tables
-Authorization: Basic Ym9iOmFkbWlucHc=
 
 ### Get single
 GET {{url}}/tables/3000
