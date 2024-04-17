@@ -1,20 +1,20 @@
 package de.schulte.smartbar.backoffice.categories;
 
 import io.quarkus.test.junit.QuarkusTest;
+import io.quarkus.test.security.TestSecurity;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.given;
 
 @QuarkusTest
-@Disabled
 class CategoriesResourceTest {
 
     @Test
-    void getsListOfCategories() {
+    @TestSecurity(authorizationEnabled = true, user = "bob", roles = {"admin"})
+    void getsListOfCategoriesAdminUser() {
         final Response response = given()
                 .when().get("/categories")
                 .then()
@@ -23,6 +23,15 @@ class CategoriesResourceTest {
         final JsonPath jsonPath = response.jsonPath();
 
         Assertions.assertEquals("Coffee", jsonPath.getString("[0].name"));
+    }
+
+    @Test
+    @TestSecurity(authorizationEnabled = true, user = "alice", roles = {"user"})
+    void getsListOfCategoriesNonAdminUser() {
+        given()
+                .when().get("/categories")
+                .then()
+                .statusCode(403);
     }
 
 }
