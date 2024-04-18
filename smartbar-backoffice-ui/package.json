@@ -9,8 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@badgateway/oauth2-client": "^2.3.0",
     "axios": "^1.6.8",
+    "keycloak-js": "^24.0.3",
     "vue": "^3.4.21"
   },
   "devDependencies": {

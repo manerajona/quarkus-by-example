@@ -2,5 +2,12 @@ import './assets/main.css'
 
 import {createApp} from 'vue'
 import App from './App.vue'
+import KeycloackService from "@/KeycloackService.js";
 
-createApp(App).mount('#app')
+const keyclock = new KeycloackService()
+keyclock.authenticate(() => {
+    const app = createApp(App)
+    app.provide('keyclock', keyclock)
+    app.mount('#app')
+})
+

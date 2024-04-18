@@ -13,12 +13,16 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
+  optimizeDeps: {
+    exclude: ['js-big-decimal']
+  },
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:8080/',
-        rewrite: (path) => path.replace('/api', '')
-      },
+        target: 'http://localhost:8080',
+        rewrite: (path) => path.replace(/^\/api/, ''),
+        changeOrigin: true
+      }
     }
   }
 })

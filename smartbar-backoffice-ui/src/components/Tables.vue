@@ -1,19 +1,17 @@
 <script setup>
-import {onMounted, ref} from "vue";
-import {OAuth2Client} from "@badgateway/oauth2-client";
+import {inject, onMounted, ref} from "vue";
 import axios from "axios";
 
 const tables = ref([]);
 
 onMounted(() => {
-  new OAuth2Client({
-    server: '',
-    clientId: '...'
-  })
-
-  axios.get("/api/tables").then(response => {
-    console.log(response.data)
-    console.log(tables)
+  const keyclock = inject('keyclock')
+  const token = keyclock.keycloak.token
+  axios.get("/api/tables", {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  }).then(response => {
     response.data.forEach(element => tables.value.push(element))
   })
 })
