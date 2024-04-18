@@ -1,0 +1,15 @@
+### Exchange Code to Token
+POST {{keycloak_baseurl}}/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+client_secret={{secret}}&redirect_uri={{keycloak_redirect_uri}}&grant_type=authorization_code&client_id={{keycloak_client_id}}&code={{code}}
+
+### Token -> Userinfo
+GET {{keycloak_baseurl}}/protocol/openid-connect/userinfo
+Authorization: Bearer {{token}}
+
+### Introspect Token
+POST {{keycloak_baseurl}}/protocol/openid-connect/token/introspect
+Content-Type: application/x-www-form-urlencoded
+
+client_secret={{secret}}&client_id={{keycloak_client_id}}&token={{token}}
