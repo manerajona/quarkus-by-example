@@ -10,7 +10,7 @@ quarkus:
   oidc:
     auth-server-url: http://localhost:7070/realms/sbo
     client-id: smartbar-backoffice
-    application-type: web-app
+    application-type: hybrid
     token-state-manager:
       split-tokens: true
     roles:
