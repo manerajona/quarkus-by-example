@@ -26,7 +26,3 @@ insert into sbo_table values (true, 8, 3001, 'Stockholm');
 insert into sbo_table values (true, 12, 3002, 'New York');
 insert into sbo_table values (false, 4, 3003, 'Munich');
 insert into sbo_table values (true, 6, 3004, 'Barcelona');
-
--- Users
-insert into sbo_user values (10000, '$2y$10$HMF/k6vb3N8TKDUghVSni.fpPDfC7SjMJN4xFHBl.LLz01vofoVyW', 'admin', 'bob');
-insert into sbo_user values (10001, '$2y$10$JBmfiry4tnz8d5b2eyWf3Orf3IyCbVBIq5J6q/pXVYpUBJ4XIciv6', 'user', 'alice');

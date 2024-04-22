@@ -2,8 +2,13 @@ quarkus:
   datasource:
     username: bob
     password: bob
-    jdbc:
-      url: jdbc:postgresql://localhost:6000/smartbarbo
-  hibernate-orm:
-    database:
-      generation: drop-and-create
+    reactive:
+      url: vertx-reactive:postgresql://localhost:6000/smartbarbo
+  oidc:
+    auth-server-url: http://localhost:7070/realms/sbo
+    client-id: smartbar-backoffice
+    application-type: hybrid
+    token-state-manager:
+      split-tokens: true
+    roles:
+      source: accesstoken
