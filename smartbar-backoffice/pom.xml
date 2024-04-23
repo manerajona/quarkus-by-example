@@ -2,13 +2,11 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <groupId>de.schulte</groupId>
-    <artifactId>smartbar-parent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
-  </parent>
+  <groupId>de.schulte</groupId>
+  <version>1.0.0-SNAPSHOT</version>
   <artifactId>smartbar-backoffice</artifactId>
   <properties>
+    <java.version>21</java.version>
     <compiler-plugin.version>3.11.0</compiler-plugin.version>
     <maven.compiler.release>21</maven.compiler.release>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -177,7 +175,7 @@
         <version>1.6.0</version>
         <executions>
           <execution>
-            <id>Create Docker image</id>
+            <id>Create Docker native image</id>
             <phase>install</phase>
             <goals>
               <goal>exec</goal>
@@ -187,9 +185,9 @@
               <arguments>
                 <argument>build</argument>
                 <argument>-f</argument>
-                <argument>src/main/docker/Dockerfile.jvm</argument>
+                <argument>src/main/docker/Dockerfile.native</argument>
                 <argument>-t</argument>
-                <argument>smartbar/backoffice:${project.version}</argument>
+                <argument>smartbar/backoffice-native:${project.version}</argument>
                 <argument>.</argument>
               </arguments>
             </configuration>
