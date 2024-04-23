@@ -3,9 +3,9 @@ quarkus:
     username: bob
     password: bob
     reactive:
-      url: vertx-reactive:postgresql://localhost:6000/smartbarbo
+      url: vertx-reactive:postgresql://${db-host}:5432/smartbarbo
   oidc:
-    auth-server-url: http://localhost:7070/realms/sbo
+    auth-server-url: http://${keycloak-host}:8080/realms/sbo
     client-id: smartbar-backoffice
     application-type: hybrid
     token-state-manager:

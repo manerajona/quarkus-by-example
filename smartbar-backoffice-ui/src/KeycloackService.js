@@ -4,7 +4,7 @@ class KeycloackService {
 
     constructor() {
         this.keycloak = new Keycloak({
-            url: 'http://localhost:7070',
+            url: 'http://smartbar-keycloak:8080',
             realm: 'sbo',
             clientId: 'smartbar-backoffice'
         })

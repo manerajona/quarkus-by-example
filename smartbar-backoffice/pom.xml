@@ -171,6 +171,31 @@
           </systemPropertyVariables>
         </configuration>
       </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>1.6.0</version>
+        <executions>
+          <execution>
+            <id>Create Docker image</id>
+            <phase>install</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <executable>docker</executable>
+              <arguments>
+                <argument>build</argument>
+                <argument>-f</argument>
+                <argument>src/main/docker/Dockerfile.jvm</argument>
+                <argument>-t</argument>
+                <argument>smartbar/backoffice:${project.version}</argument>
+                <argument>.</argument>
+              </arguments>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
   <profiles>
