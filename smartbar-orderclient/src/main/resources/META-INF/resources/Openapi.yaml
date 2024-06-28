@@ -1,0 +1,206 @@
+openapi: 3.0.3
+info:
+  title: Smartbar Orderclient
+  description: Smartbar Orderclient
+  version: 1.0.0
+paths:
+  /logins/{tableId}:
+    description: Manages logins of guests at tables
+    post:
+      description: Create a new login at a given table
+      tags:
+        - Login
+      operationId: login
+      parameters:
+        - name: tableId
+          in: path
+          required: true
+      responses:
+        200:
+          description: Login sucessfully created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LoginResponseBody"
+  /orders/{loginToken}:
+    description: Manages orders from guests
+    parameters:
+      - name: loginToken
+        in: path
+        required: true
+    post:
+      description: Place a order
+      tags:
+        - Orders
+      operationId: placeOrder
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlaceOrderRequest"
+      responses:
+        404:
+          description: Login token not found
+        200:
+          description: Order got created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PlaceOrderResponse"
+    get:
+      description: Get all orders placed for a given login
+      tags:
+        - Orders
+      operationId: listOrders
+      responses:
+        200:
+          description: See list of orders in response body
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListOrdersResponse"
+  /orders/{loginToken}/{orderId}:
+    description: Manages a single order from guests
+    parameters:
+      - name: loginToken
+        in: path
+        required: true
+        description: Login Token from table login
+      - name: orderId
+        in: path
+        required: true
+    get:
+      description: Get details of a single order
+      tags:
+        - Orders
+      operationId: getOrderDetails
+      responses:
+        404:
+          description: Order or login token not found
+        200:
+          description: Order found. Details in response body
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetOrderDetailsResponse"
+  /orders:
+    get:
+      description: Fetches all order from all guests
+      tags:
+        - Order-Management
+      operationId: listGuestsOrders
+      responses:
+        200:
+          description: see all orders for all guests in response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListGuestsOrdersResponse"
+  /orders/{orderId}:
+    parameters:
+      - name: orderId
+        in: path
+        required: true
+    put:
+      description: Updates an existing order
+      tags:
+        - Order-Management
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateOrderRequest"
+      responses:
+        200:
+          description: Updated order
+        404:
+          description: Order not found
+components:
+  schemas:
+    LoginResponseBody:
+      type: object
+      properties:
+        loginToken:
+          type: string
+      example:
+        loginToken: "abc123"
+    PlaceOrderRequest:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/PlaceOrderOrderItem"
+    PlaceOrderResponse:
+      type: object
+      properties:
+        orderId:
+          type: string
+    PlaceOrderOrderItem:
+      type: object
+      properties:
+        articleId:
+          type: string
+        quantity:
+          type: integer
+    GetOrderItem:
+      type: object
+      properties:
+        articleName:
+          type: string
+        quantity:
+          type: integer
+        price:
+          type: number
+    GetOrderDetailsResponse:
+      type: object
+      properties:
+        placedAt:
+          type: string
+          format: date-time
+        orderedItems:
+          type: array
+          items:
+            $ref: "#/components/schemas/GetOrderItem"
+        orderStatus:
+          $ref: "#/components/schemas/OrderStatus"
+    ListOrdersResponse:
+      type: object
+      properties:
+        itmes:
+          type: array
+          items:
+            $ref: "#/components/schemas/ListOrdersItem"
+    ListOrdersItem:
+      type: object
+      properties:
+        orderId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+    ListGuestsOrdersResponse:
+      type: object
+      properties:
+        tableName:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/GetOrderItem"
+        status:
+          $ref: "#/components/schemas/OrderStatus"
+        createdAt:
+          type: string
+          format: date-time
+    OrderStatus:
+      type: string
+      enum:
+        - PLACED
+        - IN_PROGRES
+        - SERVED
+    UpdateOrderRequest:
+      type: object
+      properties:
+        status:
+          $ref: "#/components/schemas/OrderStatus"
