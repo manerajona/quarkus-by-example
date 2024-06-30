@@ -17,3 +17,5 @@ buildNumber.properties
 .classpath
 /smartbar-backoffice/src/main/http/http-client.private.env.json
 /smartbar-backoffice-ui.iml
+
+/.quarkus/cli/plugins/quarkus-cli-catalog.json
