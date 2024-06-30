@@ -15,6 +15,8 @@ paths:
         - name: tableId
           in: path
           required: true
+          schema:
+            type: string
       responses:
         200:
           description: Login sucessfully created
@@ -28,6 +30,8 @@ paths:
       - name: loginToken
         in: path
         required: true
+        schema:
+          type: string
     post:
       description: Place a order
       tags:
@@ -66,9 +70,13 @@ paths:
         in: path
         required: true
         description: Login Token from table login
+        schema:
+          type: string
       - name: orderId
         in: path
         required: true
+        schema:
+          type: string
     get:
       description: Get details of a single order
       tags:
@@ -83,11 +91,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/GetOrderDetailsResponse"
-  /orders:
+  /waiter/orders:
     get:
       description: Fetches all order from all guests
       tags:
-        - Order-Management
+        - OrderManagement
       operationId: listGuestsOrders
       responses:
         200:
@@ -96,15 +104,17 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ListGuestsOrdersResponse"
-  /orders/{orderId}:
+  /waiter/orders/{orderId}:
     parameters:
       - name: orderId
         in: path
         required: true
+        schema:
+          type: string
     put:
       description: Updates an existing order
       tags:
-        - Order-Management
+        - OrderManagement
       requestBody:
         content:
           application/json:

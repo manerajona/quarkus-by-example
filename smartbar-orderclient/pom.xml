@@ -13,7 +13,7 @@
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
     <quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
-    <quarkus.platform.version>3.11.3</quarkus.platform.version>
+    <quarkus.platform.version>3.12.0</quarkus.platform.version>
     <skipITs>true</skipITs>
     <surefire-plugin.version>3.2.5</surefire-plugin.version>
   </properties>
@@ -44,6 +44,10 @@
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-config-yaml</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-hibernate-validator</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -107,6 +111,31 @@
                 <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
                 <maven.home>${maven.home}</maven.home>
               </systemPropertyVariables>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.openapitools</groupId>
+        <artifactId>openapi-generator-maven-plugin</artifactId>
+        <version>7.2.0</version>
+        <executions>
+          <execution>
+            <id>Generate JAX-RS server-api-stubs</id>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <inputSpec>${project.basedir}/src/main/resources/META-INF.resources/openapi.yaml</inputSpec>
+              <generatorName>jaxrs-spec</generatorName>
+              <apiPackage>de.schulte.smartbar.orderclient.api</apiPackage>
+              <modelPackage>de.schulte.smartbar.orderclient.api.model</modelPackage>
+              <configOptions>
+                <sourceFolder>src/main/java</sourceFolder>
+                <useJakartaEe>true</useJakartaEe>
+                <useSwaggerAnnotations>false</useSwaggerAnnotations>
+                <interfaceOnly>true</interfaceOnly>
+              </configOptions>
             </configuration>
           </execution>
         </executions>
