@@ -132,8 +132,29 @@ components:
       properties:
         loginToken:
           type: string
-      example:
-        loginToken: "abc123"
+        categories:
+          type: array
+          items:
+            $ref: "#/components/schemas/MenuCategory"
+    MenuCategory:
+      type: object
+      properties:
+        name:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/MenuItem"
+    MenuItem:
+      type: object
+      properties:
+        articleName:
+          type: string
+        description:
+          type: string
+        articlePrice:
+          type: number
+          format: double
     PlaceOrderRequest:
       type: object
       properties:
