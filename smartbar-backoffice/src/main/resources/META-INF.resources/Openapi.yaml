@@ -1,0 +1,51 @@
+openapi: 3.0.3
+info:
+  title: Smartbar Backoffice API
+  description: Smartbar Backoffice API (only used by Orderclient))
+  version: 1.0.0
+servers:
+  - url: 'https'
+paths:
+  /menu:
+    get:
+      description: Gets the menu (all articles in all categories)
+      operationId: getMenu
+      responses:
+        200:
+          description: Reponse body contains the menu
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Menu"
+components:
+  schemas:
+    Article:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        price:
+          type: number
+          format: double
+        picture:
+          type: string
+    Category:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        articles:
+          type: array
+          items:
+            $ref: "#/components/schemas/Article"
+    Menu:
+      type: object
+      properties:
+        categories:
+          type: array
+          items:
+            $ref: "#/components/schemas/Category"
