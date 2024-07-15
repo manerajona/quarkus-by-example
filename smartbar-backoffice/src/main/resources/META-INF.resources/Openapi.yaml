@@ -16,10 +16,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Menu"
+                $ref: "#/components/schemas/ApiMenu"
 components:
   schemas:
-    Article:
+    ApiArticle:
       type: object
       properties:
         name:
@@ -31,7 +31,7 @@ components:
           format: double
         picture:
           type: string
-    Category:
+    ApiCategory:
       type: object
       properties:
         name:
@@ -41,11 +41,11 @@ components:
         articles:
           type: array
           items:
-            $ref: "#/components/schemas/Article"
-    Menu:
+            $ref: "#/components/schemas/ApiArticle"
+    ApiMenu:
       type: object
       properties:
         categories:
           type: array
           items:
-            $ref: "#/components/schemas/Category"
+            $ref: "#/components/schemas/ApiCategory"
