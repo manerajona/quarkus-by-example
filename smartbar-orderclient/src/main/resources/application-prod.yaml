@@ -1,0 +1,3 @@
+backoffice:
+  menuapi:
+    url: "http://localhost:8088/menu"

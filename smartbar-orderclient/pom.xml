@@ -26,6 +26,13 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+      <dependency>
+        <groupId>${quarkus.platform.group-id}</groupId>
+        <artifactId>quarkus-camel-bom</artifactId>
+        <version>${quarkus.platform.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
     </dependencies>
   </dependencyManagement>
   <dependencies>
@@ -48,6 +55,14 @@
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-hibernate-validator</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel.quarkus</groupId>
+      <artifactId>camel-quarkus-mapstruct</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-rest-jackson</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -84,6 +99,13 @@
           <compilerArgs>
             <arg>-parameters</arg>
           </compilerArgs>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>org.mapstruct</groupId>
+              <artifactId>mapstruct-processor</artifactId>
+              <version>1.5.5.Final</version>
+            </path>
+          </annotationProcessorPaths>
         </configuration>
       </plugin>
       <plugin>
@@ -130,6 +152,25 @@
               <generatorName>jaxrs-spec</generatorName>
               <apiPackage>de.schulte.smartbar.orderclient.api</apiPackage>
               <modelPackage>de.schulte.smartbar.orderclient.api.model</modelPackage>
+              <configOptions>
+                <sourceFolder>src/main/java</sourceFolder>
+                <useJakartaEe>true</useJakartaEe>
+                <useSwaggerAnnotations>false</useSwaggerAnnotations>
+                <interfaceOnly>true</interfaceOnly>
+              </configOptions>
+            </configuration>
+          </execution>
+          <execution>
+            <id>Generate Backoffice API model</id>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <inputSpec>${project.basedir}/../smartbar-backoffice/src/main/resources/META-INF.resources/openapi.yaml</inputSpec>
+              <generatorName>jaxrs-spec</generatorName>
+              <apiPackage>de.schulte.smartbar.backoffice.api</apiPackage>
+              <modelPackage>de.schulte.smartbar.backoffice.api.model</modelPackage>
+              <generateApis>false</generateApis>
               <configOptions>
                 <sourceFolder>src/main/java</sourceFolder>
                 <useJakartaEe>true</useJakartaEe>
