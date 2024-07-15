@@ -192,9 +192,9 @@
               <arguments>
                 <argument>build</argument>
                 <argument>-f</argument>
-                <argument>src/main/docker/Dockerfile.native</argument>
+                <argument>src/main/docker/Dockerfile.jvm</argument>
                 <argument>-t</argument>
-                <argument>smartbar/backoffice-native:${project.version}</argument>
+                <argument>smartbar/backoffice:${project.version}</argument>
                 <argument>.</argument>
               </arguments>
             </configuration>
