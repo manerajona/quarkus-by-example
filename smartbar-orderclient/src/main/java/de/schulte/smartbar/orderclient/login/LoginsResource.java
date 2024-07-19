@@ -5,6 +5,8 @@ import de.schulte.smartbar.orderclient.api.model.LoginResponseBody;
 import jakarta.inject.Inject;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
+import java.util.concurrent.CompletionStage;
+
 public class LoginsResource implements LoginsApi {
 
     private final MenuApiClient menuApiClient;
@@ -18,8 +20,8 @@ public class LoginsResource implements LoginsApi {
     }
 
     @Override
-    public LoginResponseBody login(String tableId) {
-        return menuMapper.mapToLoginResonse(menuApiClient.getMenu());
+    public CompletionStage<LoginResponseBody> login(String tableId) {
+        return menuApiClient.getMenu().thenApply(menuMapper::mapToLoginResonse);
     }
 
 }
