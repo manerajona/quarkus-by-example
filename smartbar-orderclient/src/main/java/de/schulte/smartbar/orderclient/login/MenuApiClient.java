@@ -1,6 +1,7 @@
 package de.schulte.smartbar.orderclient.login;
 
 import de.schulte.smartbar.backoffice.api.model.ApiMenu;
+import io.quarkus.cache.CacheResult;
 import io.smallrye.mutiny.Uni;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
@@ -19,10 +20,11 @@ import java.util.concurrent.CompletionStage;
 public interface MenuApiClient {
 
     @GET
-    @Timeout(100)
+    @Timeout(1000)
     @Retry
     @Fallback(fallbackMethod = "getFallbackMenu")
     @CircuitBreaker(delay = 1, delayUnit = ChronoUnit.MINUTES)
+    @CacheResult(cacheName = "menu-cache")
     CompletionStage<ApiMenu> getMenu();
 
     default CompletionStage<ApiMenu> getFallbackMenu() {
