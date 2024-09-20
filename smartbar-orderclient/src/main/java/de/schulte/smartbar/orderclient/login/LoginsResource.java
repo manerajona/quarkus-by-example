@@ -2,10 +2,8 @@ package de.schulte.smartbar.orderclient.login;
 
 import de.schulte.smartbar.orderclient.api.LoginsApi;
 import de.schulte.smartbar.orderclient.api.model.LoginResponseBody;
-import io.quarkus.cache.CacheInvalidateAll;
 import io.quarkus.cache.CacheResult;
 import jakarta.inject.Inject;
-import jakarta.ws.rs.DELETE;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 import java.util.concurrent.CompletionStage;
@@ -27,9 +25,5 @@ public class LoginsResource implements LoginsApi {
     public CompletionStage<LoginResponseBody> login(String tableId) {
         return menuApiClient.getMenu().thenApply(menuMapper::mapToLoginResonse);
     }
-
-    @CacheInvalidateAll(cacheName = "menu-cache")
-    @DELETE
-    public void invalidateCacheByKey() {}
 
 }
