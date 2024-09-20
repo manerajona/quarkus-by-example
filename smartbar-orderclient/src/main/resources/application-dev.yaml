@@ -3,5 +3,8 @@ quarkus:
     de.schulte.smartbar.orderclient.login.MenuApiClient:
       url: "http://localhost:8088"
   cache:
-    caffeine:
-      expire-after-write: 10S
+    redis:
+      expire-after-write: 60S
+      menu-cache:
+        key-type: java.lang.String
+        value-type: de.schulte.smartbar.orderclient.api.model.LoginResponseBody
