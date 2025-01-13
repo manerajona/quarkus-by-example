@@ -5,3 +5,6 @@ quarkus:
   cache:
     caffeine:
       expire-after-write: 10S
+  redis:
+    logins:
+      hosts: redis://localhost:5200/0
